@@ -33,6 +33,7 @@
         <mybatis.version>3.0.5</mybatis.version>
         <mybatis.test.version>3.0.5</mybatis.test.version>
         <lombok.version>1.18.42</lombok.version>
+        <pagehelper.vesion>2.1.0</pagehelper.vesion>
     </properties>
 
     <dependencies>
@@ -56,6 +57,12 @@
                 <artifactId>mybatis-spring-boot-starter-test</artifactId>
                 <version>${mybatis.test.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.vesion}</version>
             </dependency>
 
         </dependencies>

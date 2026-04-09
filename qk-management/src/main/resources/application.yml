@@ -1,1 +1,14 @@
-spring.application.name=qk-management
+#数据库信息配置
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/qk
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
+
+# mybatis配置
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 配置数据库sql执行信息(日志)
+    map-underscore-to-camel-case: true # 添加驼峰命名映射
+  mapper-locations: classpath:mapper/*.xml # 如果没有按照xml配置文件的三个规范走,就得单独配置xml映射文件去找
