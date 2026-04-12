@@ -69,4 +69,12 @@ public class DeptServiceImpl implements DeptService {
         //1.调用mapper
         deptMapper.deleteDept(id);
     }
+    /*
+    查询所有正常的部门数据
+     */
+    @Override
+    public List<Dept> findAllNormalDept() {
+        // 1.调用mapper
+        return deptMapper.findAllNormalDept();
+    }
 }

@@ -3,6 +3,8 @@ package com.qk.service;
 import com.qk.common.PageResult;
 import com.qk.entity.Dept;
 
+import java.util.List;
+
 
 public interface DeptService {
     /*
@@ -26,5 +28,9 @@ public interface DeptService {
     删除部门
      */
     void deleteDept(Integer id);
+    /*
+       查询所有所有的正常部门的数据
+        */
+    List<Dept> findAllNormalDept();
 
 }
