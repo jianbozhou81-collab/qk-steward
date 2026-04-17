@@ -77,7 +77,7 @@ public class DeptController {
         return Result.success();
     }
     /*
-    查询所有所有的正常部门的数据
+    查询所有所有的正常部门的数据(服务于新增用户的操作)
      */
     @GetMapping("/list")
     public Result findAllNormalDept(){

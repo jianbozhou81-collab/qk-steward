@@ -77,7 +77,7 @@ public class CharacterController {
         return Result.success();
     }
     /*
-    查询所有角色
+    查询所有角色(服务于新增用户的操作)
      */
     @GetMapping("/list")
     public Result findAllRoles(){
