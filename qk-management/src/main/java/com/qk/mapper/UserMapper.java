@@ -49,5 +49,9 @@ public interface UserMapper {
      */
     @Select("select * from user where dept_id=#{deptId}")
     List<User> findUsersByDeptId(Integer deptId);
-
+    /*
+    用户登录验证响应数据
+     */
+    @Select("select u.*,r.label role_Label from user u left join role r on u.role_id = r.id where username = #{username};")
+    User findUserByUsername(String username);
 }

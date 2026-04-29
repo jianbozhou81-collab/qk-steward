@@ -45,4 +45,12 @@ public class GlobalExceptionHander {
         }
         return Result.error("服务器异常");
     }
+    /*
+    用户异常捕获
+     */
+    @ExceptionHandler
+    public Result handleBuisnessException(BuisnessException e){
+        log.error("出现异常:{}",e);
+        return Result.error(e.getMessage());
+    }
 }

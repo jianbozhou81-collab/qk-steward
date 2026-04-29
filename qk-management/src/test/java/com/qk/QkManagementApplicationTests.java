@@ -10,4 +10,10 @@ class QkManagementApplicationTests {
     void contextLoads() {
     }
 
+    @Test
+    public void testLocalDateTimejosn(){
+
+        System.out.println("测试");
+    }
+
 }

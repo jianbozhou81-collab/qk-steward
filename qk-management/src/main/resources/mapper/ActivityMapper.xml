@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qk.mapper.ActivityMapper">
+    <!-- 活动列表分页动态查询 -->
+    <select id="findActivities" resultType="com.qk.entity.Activity">
+        select id, channel, name, start_time, end_time, description, type, discount, voucher, create_time, update_time from activity
+        <where>
+            <if test="channel != null">
+                and channel like conact('%',#{channel},'%')
+            </if>
+            <if test="type != null">
+                and type like concat('%',#{type},'%')
+            </if>
+            <if test =" status == 1"> /* &gt; 是大于号   &lt;是小于号 */
+                and start_time &gt; now()
+            </if>
+            <if test =" status == 2">
+                and start_time &lt; now() and end_time &gt; now()
+            </if>
+            <if test =" status == 3">
+                and end_time &lt; now()
+            </if>
+        </where>
+    </select>
+</mapper>

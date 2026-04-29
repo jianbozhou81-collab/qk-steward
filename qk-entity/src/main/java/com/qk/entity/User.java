@@ -87,4 +87,5 @@ public class User {
      */
     private String deptName;
     private String roleName;
+    private String roleLabel;
 }
