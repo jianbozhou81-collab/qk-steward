@@ -117,4 +117,12 @@ public class ClueServiceImpl extends ServiceImpl<ClueMapper, Clue> implements Cl
         cluetrackrecord.setCreateTime(LocalDateTime.now());//创建时间
         cluetrackRecordMapper.insert(cluetrackrecord);
     }
+    /*
+    线索池查询
+     */
+    @Override
+    public PageResult<Clue> findCluePool(Page<Clue> cluePage, ClueDto clueDto) {
+        Page<Clue> page = clueMapper.findCluePool(cluePage,clueDto);
+        return new PageResult<>(page.getTotal(),page.getRecords());
+    }
 }

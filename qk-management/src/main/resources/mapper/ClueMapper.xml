@@ -108,4 +108,24 @@
             count(if(status=5,1,null)) clueConvertBusiness
         from clue;
     </select>
+    <!-- 线索池查询 -->
+    <select id="findCluePool" resultType="com.qk.entity.Clue">
+        select
+        c.*,a.name as activity_name
+        from
+        clue c left join activity a on c.user_id = a.id
+        <where>
+            <if test="clueDto.clueId != null">
+                c.id = #{clueDto.clueId}
+            </if>
+            <if test="clueDto.phone != null and clueDto.phone != ''">
+                c.phone like concat('%',#{clueDto.phone}, '%')
+            </if>
+            <if test="clueDto.channel != null">
+                c.channel = #{clueDto.channel}
+            </if>
+            c.status = 4
+        </where>
+        order by c.update_time desc
+    </select>
 </mapper>

@@ -104,6 +104,16 @@ public class ClueController {
         //响应
         return Result.success();
     }
+    /*
+    线索池查询
+     */
+    @GetMapping("/pool")
+    public Result findCluePool(ClueDto clueDto) {
+        //调用service查询(设计多表查询,自编)
+        PageResult<Clue> pageResult=clueService.findCluePool(new Page<Clue>(clueDto.getPage(),clueDto.getPageSize()),clueDto);
+        //响应数据
+        return Result.success(pageResult);
+    }
 
 
 }

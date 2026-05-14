@@ -21,5 +21,8 @@ public interface ClueMapper extends BaseMapper<Clue> {
     统计各线索状态数
      */
     ReportViewVo countClue();
-
+    /*
+    线索池查询
+     */
+    Page<Clue> findCluePool(Page<Clue> cluePage, ClueDto clueDto);
 }

@@ -29,4 +29,8 @@ public interface ClueService extends IService<Clue> {
     伪线索处理
      */
     void convertFalseClue(Integer id, FalseClueDto falseClueDto);
+    /*
+    线索池的查询
+     */
+    PageResult<Clue> findCluePool(Page<Clue> cluePage, ClueDto clueDto);
 }

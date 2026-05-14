@@ -1,6 +1,7 @@
 package com.qk.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.qk.dto.CustomerDto;
 import com.qk.entity.Customer;
 import com.qk.mapper.CustomerMapper;
@@ -10,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 @Slf4j
 @Service
-public class CustomerServiceImpl implements CustomerService {
+public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> implements CustomerService {
     @Autowired
     private CustomerMapper customerMapper;
     @Override

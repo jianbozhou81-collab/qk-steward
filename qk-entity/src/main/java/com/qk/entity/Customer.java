@@ -1,5 +1,6 @@
 package com.qk.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 import java.time.LocalDateTime;
 
@@ -24,5 +25,6 @@ public class Customer {
     /*
     扩展属性
      */
+    @TableField(exist = false)
     private String courseName;
 }

@@ -110,4 +110,9 @@ public class Clue {
      */
     @TableField(exist = false)
     private String record;
+    /*
+    活动名称
+     */
+    @TableField(exist = false)
+    private String activityName;
 }
