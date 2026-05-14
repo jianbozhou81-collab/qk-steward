@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qk.mapper.CustomerMapper">
+<!-- 客户分页查询 -->
+    <select id="listCustomer" resultType="com.qk.entity.Customer">
+        select
+            c.* ,
+            cr.name as course_name
+        from customer c left join course cr on c.course_id = cr.id
+        <where>
+            <if test="customerDto.getPhone() != null and customerDto.getPhone() != ''">
+                and c.phone like concat('%',#{customerDto.getPhone()},'%')
+            </if>
+            <if test="customerDto.getName() != null and customerDto.getName() != ''">
+                and c.channel like concat('%',#{customerDto.getName()},'%')
+            </if>
+            <if test="customerDto.getChannel() != null and customerDto.getChannel() !='' ">
+                and c.channel like concat('%',#{customerDto.getChannel()},'%')
+            </if>
+            <if test="customerDto.getSubject() != null">
+                and c.subject = #{customerDto.getSubject()}
+            </if>
+        </where>
+        order by c.update_time desc
+    </select>
+</mapper>

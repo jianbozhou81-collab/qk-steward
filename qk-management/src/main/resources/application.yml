@@ -1,10 +1,15 @@
-#数据库信息配置
+#要连接的数据库信息配置
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/qk
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 1234
+    #配置Redis连接信息
+  data:
+    redis:
+      host: localhost
+      port: 6379
 
 # mybatis配置
 mybatis:
@@ -19,3 +24,16 @@ aliyun:
     endpoint: https://oss-cn-beijing.aliyuncs.com
     bucketName: java-web-oss123
     region: cn-beijing
+
+#mybatisplus配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 配置数据库sql执行信息(日志)
+    map-underscore-to-camel-case: true # 添加驼峰命名映射
+  mapper-locations: mapper/*.xml  # 代码逻辑如果没有/无法按照xml配置文件的三个规范走,就得单独配置xml映射文件去找(动态查找等)
+  global-config:
+    db-config:
+      id-type: auto # 主键策略
+
+#配置日志信息,查看spring事务管理的底层日志信息(可加可不加)
+

@@ -27,7 +27,7 @@ public class TokenFileter implements Filter {//init 和 destroy是默认标签�
         String jwt = httprequest.getHeader("Token");
         //判断Token是否存在
         if (jwt == null || jwt.isEmpty()){
-            //响应错误信息401
+            //响应错误信息401(前端接收401会跳转到登录界面)
             log.info("请求token不存在");
             httpresponse.setStatus(401);
             return;
@@ -42,5 +42,6 @@ public class TokenFileter implements Filter {//init 和 destroy是默认标签�
         }
         //放行
         chain.doFilter(request,response);
+
     }
 }

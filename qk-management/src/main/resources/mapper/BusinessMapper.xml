@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qk.mapper.BusinessMapper">
+    <!-- 商机分页查询 -->
+    <select id="listBusiness" resultType="com.qk.entity.Business">
+        select
+            b.*,u.name assign_name
+        from
+            business b left join user u on b.user_id = u.id
+        <where>
+            <if test="businessDto.businessId != null">
+                b.id = #{businessDto.businessId}
+            </if>
+            <if test="businessDto.name != null and businessDto.name != ''">
+                b.name like concat('%',#{businessDto.name}, '%')
+            </if>
+            <if test="businessDto.phone != null and businessDto.phone != ''">
+                b.phone like concat('%',#{businessDto.phone}, '%')
+            </if>
+            <if test="businessDto.status != null">
+                b.status = #{businessDto.status}
+            </if>
+            <if test="businessDto.assignName != null and businessDto.assignName != ''">
+                u.name like concat('%',#{businessDto.assignName}, '%')
+            </if>
+        </where>
+        order by
+            b.update_time desc
+    </select>
+    <resultMap id="BusinessResultMapp" type="com.qk.entity.Business">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <result property="gender" column="gender"/>
+        <result property="age" column="age"/>
+        <result property="wechat" column="wechat"/>
+        <result property="qq" column="qq"/>
+        <result property="subject" column="subject"/>
+        <result property="courseId" column="course_id"/>
+        <result property="degree" column="degree"/>
+        <result property="jobStatus" column="job_status"/>
+        <result property="channel" column="channel"/>
+        <result property="remark" column="remark"/>
+        <result property="status" column="status"/>
+        <result property="userId" column="user_id"/>
+        <result property="clueId" column="clue_id"/>
+        <result property="nextTime" column="next_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <collection property="trackRecords" ofType="com.qk.entity.BusinessTrackRecord">
+            <id property="id" column="tr_id"/>
+            <result property="businessId" column="tr_business_id"/>
+            <result property="userId" column="tr_user_id"/>
+            <result property="trackStatus" column="tr_track_status"/>
+            <result property="keyItems" column="tr_key_items"/>
+            <result property="nextTime" column="tr_next_time"/>
+            <result property="record" column="tr_record"/>
+            <result property="createTime" column="tr_create_time"/>
+            <result property="assignName" column="assign_name"/>
+        </collection>
+
+    </resultMap>
+    <!-- 根据id商机跟进回显 -->
+    <select id="findById" resultMap="BusinessResultMapp">
+        select
+            b.id,
+            b.name,
+            b.phone,
+            b.gender,
+            b.age,
+            b.wechat,
+            b.qq,
+            b.subject,
+            b.course_id,
+            b.degree,
+            b.job_status,
+            b.channel,
+            b.remark,
+            b.status,
+            b.user_id,
+            b.clue_id,
+            b.next_time,
+            b.create_time,
+            b.update_time,
+            tr.id as tr_id,
+            tr.business_id as tr_business_id,
+            tr.user_id as tr_user_id,
+            tr.track_status as tr_track_status,
+            tr.key_items as tr_key_items,
+            tr.next_time as tr_next_time,
+            tr.record as tr_record,
+            tr.create_time as tr_create_time,
+            u.name as assign_name
+        from business b left join business_track_record tr on b.id = tr.business_id
+                        left join user u on tr.user_id = u.id
+        where b.id = #{id};
+
+    </select>
+    <!-- 统计各商机状态数 -->
+    <select id="countBusiness" resultType="com.qk.vo.ReportViewVo">
+        select
+            count(1) businessTotal,
+            count(if(status=1,1,null)) businessWaitAllot,
+            count(if(status=2,1,null)) businessWaitFollow,
+            count(if(status=3,1,null)) businessFollowing,
+            count(if(status=4,1,null)) businessFalse,
+            count(if(status=5,1,null)) businessConvertCustomer
+        from business;
+    </select>
+    <!-- 公海池分页查询 -->
+    <select id="listBusinessBack" resultType="com.qk.entity.Business">
+        select
+        b.*
+        from
+        business b
+        <where>
+            <if test="businessDto.businessId != null">
+                b.id = #{businessDto.businessId}
+            </if>
+            <if test="businessDto.name != null and businessDto.name != ''">
+                b.name like concat('%',#{businessDto.name}, '%')
+            </if>
+            <if test="businessDto.phone != null and businessDto.phone != ''">
+                b.phone like concat('%',#{businessDto.phone}, '%')
+            </if>
+            <if test="businessDto.subject != null">
+                b.subject = #{businessDto.subject}
+            </if>
+            b.status = 4
+        </where>
+        order by
+        b.update_time desc
+    </select>
+</mapper>

@@ -10,9 +10,9 @@ import java.util.Map;
 public class JwtUtils {
 
     // 秘钥
-    private static final String SECRET_KEY = "cWluZ2tl";
+    private static final String SECRET_KEY = "cWluZ2tl";// 这里使用一个简单的字符串作为密钥
     // 令牌有效期（12小时）
-    private static final long EXPIRATION_TIME = 12 * 60 * 60 * 1000;
+    private static final long EXPIRATION_TIME = 24 * 60 * 60 * 1000;//  24小时
 
     /**
      * 生成JWT令牌

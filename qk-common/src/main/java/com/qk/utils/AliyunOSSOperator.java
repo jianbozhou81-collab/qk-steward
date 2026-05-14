@@ -19,7 +19,9 @@ public class AliyunOSSOperator {
 /*    private static final String ENDPOINT = "https://oss-cn-beijing.aliyuncs.com";
     private static final String BUCKET_NAME = "java-web-oss123";
     private static final String REGION = "cn-beijing";*/
+
     // 配置参数少的情况可以一个一个用@value注解来获取
+
 /*    @Value("${aliyun.oss.endpoint}")
     private String ENDPOINT;
     @Value("${aliyun.oss.bucketName}")

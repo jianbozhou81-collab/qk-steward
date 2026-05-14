@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qk.mapper.ClueMapper">
+    <!-- 线索分页查询 -->
+    <select id="listClue" resultType="com.qk.entity.Clue">
+        select
+            c.*,u.name assign_name
+        from
+            clue c left join user u on c.user_id = u.id
+        <where>
+            <if test="clueDto.clueId != null">
+                c.id = #{clueDto.clueId}
+            </if>
+            <if test="clueDto.phone != null and clueDto.phone != ''">
+                c.phone like concat('%',#{clueDto.phone}, '%')
+            </if>
+            <if test="clueDto.status != null">
+                c.status = #{clueDto.status}
+            </if>
+            <if test="clueDto.channel != null">
+                c.channel = #{clueDto.channel}
+            </if>
+            <if test="clueDto.assignName != null and clueDto.assignName != ''">
+                u.name like concat('%',#{clueDto.assignName}, '%')
+            </if>
+        </where>
+        order by c.update_time desc
+
+    </select>
+
+    <!-- 线索查询回显 -->
+    <!-- 自定义封装对象  -->
+    <resultMap id="culeResultMap" type="com.qk.entity.Clue">
+        <id property="id" column="id"/>
+        <result property="phone" column="phone"/>
+        <result property="channel" column="channel"/>
+        <result property="activityId" column="activity_id"/>
+        <result property="name" column="name"/>
+        <result property="gender" column="gender"/>
+        <result property="age" column="age"/>
+        <result property="wechat" column="wechat"/>
+        <result property="qq" column="qq"/>
+        <result property="userId" column="user_id"/>
+        <result property="status" column="status"/>
+        <result property="subject" column="subject"/>
+        <result property="level" column="level"/>
+        <result property="nextTime" column="next_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <collection property="trackRecords" ofType="com.qk.entity.ClueTrackRecord">
+            <id property="id" column="tr_id"/>
+            <result property="clueId" column="tr_clue_id"/>
+            <result property="userId" column="tr_user_id"/>
+            <result property="subject" column="tr_subject"/>
+            <result property="level" column="tr_level"/>
+            <result property="record" column="tr_record"/>
+            <result property="nextTime" column="tr_next_time"/>
+            <result property="type" column="tr_type"/>
+            <result property="falseReason" column="tr_false_reason"/>
+            <result property="createTime" column="tr_create_time"/>
+            <result property="assignName" column="assign_name"/>
+        </collection>
+
+    </resultMap>
+    <select id="findById" resultMap="culeResultMap">
+        select
+            c.id,
+            c.phone,
+            c.channel,
+            c.activity_id,
+            c.name,
+            c.gender,
+            c.age,
+            c.wechat,
+            c.qq,
+            c.user_id,
+            c.status,
+            c.subject,
+            c.level,
+            c.next_time,
+            c.create_time,
+            c.update_time,
+            tr.id as tr_id,
+            tr.clue_id as tr_clue_id,
+            tr.user_id as tr_user_id,
+            tr.subject as tr_subject,
+            tr.level as tr_level,
+            tr.record as tr_record,
+            tr.next_time as tr_next_time,
+            tr.type as tr_type,
+            tr.false_reason as tr_false_reason,
+            tr.create_time as tr_create_time,
+            u.name as assign_name
+        from clue c left join clue_track_record tr on c.id = tr.clue_id
+                    left join user u on tr.user_id = u.id
+        where c.id = #{id};
+    </select>
+    <!-- 统计各线索状态数 -->
+    <select id="countClue" resultType="com.qk.vo.ReportViewVo">
+        select
+            count(1) clueTotal,
+            count(if(status=1,1,null)) clueWaitAllot,
+            count(if(status=2,1,null)) clueWaitFollow,
+            count(if(status=3,1,null)) clueFollowing,
+            count(if(status=4,1,null)) clueFalse,
+            count(if(status=5,1,null)) clueConvertBusiness
+        from clue;
+    </select>
+</mapper>
