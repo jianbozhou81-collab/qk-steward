@@ -1,5 +1,6 @@
 package com.qk.controller;
 
+import com.qk.anno.OperateRecord;
 import com.qk.common.PageResult;
 import com.qk.common.Result;
 import com.qk.entity.Character;
@@ -31,6 +32,7 @@ public class CharacterController {
     /*
     角色删除:根据id删除
      */
+    @OperateRecord
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id){
         // 1.调用service层
@@ -42,6 +44,7 @@ public class CharacterController {
     /*
     新增角色
      */
+    @OperateRecord
     @PostMapping
     public Result addRole(@RequestBody Character character){
         // 日志
@@ -67,6 +70,7 @@ public class CharacterController {
     /*
     修改角色
      */
+    @OperateRecord
     @PutMapping
     public Result updateRole(@RequestBody Character character){
         // 日志

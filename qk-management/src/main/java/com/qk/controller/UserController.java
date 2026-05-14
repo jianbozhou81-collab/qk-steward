@@ -1,5 +1,6 @@
 package com.qk.controller;
 
+import com.qk.anno.OperateRecord;
 import com.qk.common.PageResult;
 import com.qk.common.Result;
 import com.qk.dto.UserDto;
@@ -33,6 +34,7 @@ public class UserController {
     /*
     新增用户
      */
+    @OperateRecord
     @PostMapping
     public Result addUser(@RequestBody User user){
         log.info("新增用户:{}",user);
@@ -44,6 +46,7 @@ public class UserController {
     /*
     删除用户:单选就是只有一个id的list,多选就是多个id的list,直接就包含了两个删除功能无敌了
      */
+    @OperateRecord
     @DeleteMapping("/{ids}")
     public Result delete(@PathVariable List<Integer> ids){
         log.info("删除用户:{}",ids);
@@ -67,6 +70,7 @@ public class UserController {
     /*
     修改用户:修改回显数据
      */
+    @OperateRecord
     @PutMapping
     public Result updateUser(@RequestBody User user){
         log.info("修改用户:{}",user);

@@ -1,5 +1,6 @@
 package com.qk.controller;
 
+import com.qk.anno.OperateRecord;
 import com.qk.common.PageResult;
 import com.qk.common.Result;
 import com.qk.entity.Dept;
@@ -19,6 +20,7 @@ public class DeptController {
     /*
     新增部门
      */
+    @OperateRecord
     @PostMapping
     public Result addDept(@RequestBody Dept dept){
         //日志
@@ -55,6 +57,7 @@ public class DeptController {
     /*
     修改部门:修改回显的部门信息以达成修改
      */
+    @OperateRecord
     @PutMapping
     public Result updateDept(@RequestBody Dept dept){
         //日志
@@ -67,6 +70,7 @@ public class DeptController {
     /*
     删除部门
      */
+    @OperateRecord
     @DeleteMapping("/{id}")
     public Result deleteDept(@PathVariable Integer id){
         //日志

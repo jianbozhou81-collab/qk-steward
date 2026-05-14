@@ -1,5 +1,6 @@
 package com.qk.controller;
 
+import com.qk.anno.OperateRecord;
 import com.qk.common.PageResult;
 import com.qk.common.Result;
 import com.qk.entity.Activity;
@@ -33,6 +34,7 @@ public class ActivityController {
     /*
     活动删除:根据id删除
      */
+    @OperateRecord
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id){
         log.info("删除活动:{}",id);
@@ -44,6 +46,7 @@ public class ActivityController {
     /*
     新赠活动
      */
+    @OperateRecord
     @PostMapping
     public Result addActivity(@RequestBody Activity activity){
         /*        修正开始时间和结束时间的的时间格式(
@@ -72,6 +75,7 @@ public class ActivityController {
     /*
     修改活动:修改回显的部门信息以达成修改
      */
+    @OperateRecord
     @PutMapping
     public Result updateActivity(@RequestBody Activity activity){
         log.info("修改活动:{}",activity);

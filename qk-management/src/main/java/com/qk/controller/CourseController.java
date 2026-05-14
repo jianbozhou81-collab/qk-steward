@@ -1,5 +1,6 @@
 package com.qk.controller;
 
+import com.qk.anno.OperateRecord;
 import com.qk.common.PageResult;
 import com.qk.common.Result;
 import com.qk.entity.Course;
@@ -30,6 +31,7 @@ public class CourseController {
     /*
     课程删除:根据id删除
      */
+    @OperateRecord
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id){
         // 1.调用service层
@@ -40,6 +42,7 @@ public class CourseController {
     /*
     新增课程
      */
+    @OperateRecord
     @PostMapping
     public Result addCourse(@RequestBody Course course){
         // 1.调用service层
@@ -60,6 +63,7 @@ public class CourseController {
     /*
     修改课程
      */
+    @OperateRecord
     @PutMapping
     public Result updateCourse(@RequestBody Course course){
         // 1.调用service层
